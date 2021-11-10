@@ -1,0 +1,30 @@
+{
+  "variables": {
+    "aws_region": "us-west-2",
+    "aws_source_ami": "ami-03191f18e2403e784",
+    "aws_instance_type": "t3.large"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "associate_public_ip_address": true,
+      "region": "{{user `aws_region`}}",
+      "source_ami": "{{user `aws_source_ami`}}",
+      "instance_type": "{{user `aws_instance_type`}}",
+      "ami_name": "my-ami-{{timestamp}}",
+      "ssh_username": "ec2-user",
+      "tags": {
+        "application": "img-mgr",
+        "created-by": "packer"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type":    "chef-solo",
+      "version": "14",
+      "cookbook_paths": [ "vendor/" ],
+      "run_list": [ "my_wrapper" ]
+    }
+  ]
+}
