@@ -1,4 +1,3 @@
 # my_wrapper
 
-TODO: Enter the cookbook description here.
-
+This is basically just a copy of https://github.com/nkempel/my_wrapper
