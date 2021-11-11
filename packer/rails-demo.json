@@ -6,6 +6,21 @@
   },
   "builders": [
     {
+      "name": "amazon-linux-img-mgr",
+      "type": "amazon-ebs",
+      "associate_public_ip_address": true,
+      "region": "{{user `aws_region`}}",
+      "source_ami": "{{user `aws_source_ami`}}",
+      "instance_type": "{{user `aws_instance_type`}}",
+      "ami_name": "my-ami-{{timestamp}}",
+      "ssh_username": "ec2-user",
+      "tags": {
+        "application": "img-mgr",
+        "created-by": "packer"
+      }
+    },
+    {
+      "name": "ubuntu-img-mgr",
       "type": "amazon-ebs",
       "associate_public_ip_address": true,
       "region": "{{user `aws_region`}}",
@@ -24,7 +39,13 @@
       "type":    "chef-solo",
       "version": "14",
       "cookbook_paths": [ "vendor/" ],
-      "run_list": [ "my_wrapper" ]
+      "run_list": [ "my_wrapper" ],
+      "json": {},
+      "override": {
+        "n8s-rails-app": {
+          "json": {"app": {"repo_url": "https://github.com/nkempel/rails_demo.git"}}
+        }
+      }
     }
   ]
 }
