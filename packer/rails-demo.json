@@ -15,7 +15,7 @@
       "ami_name": "my-ami-{{timestamp}}",
       "ssh_username": "ec2-user",
       "tags": {
-        "application": "img-mgr",
+        "application": "img-mgr-amz",
         "created-by": "packer"
       }
     },
@@ -27,9 +27,9 @@
       "source_ami": "{{user `aws_source_ami`}}",
       "instance_type": "{{user `aws_instance_type`}}",
       "ami_name": "my-ami-{{timestamp}}",
-      "ssh_username": "ec2-user",
+      "ssh_username": "ubuntu",
       "tags": {
-        "application": "img-mgr",
+        "application": "img-mgr-ubu",
         "created-by": "packer"
       }
     }
